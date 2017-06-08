@@ -1,0 +1,243 @@
+{
+  "contract_name": "Mortgage",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "balances",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "deposit",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "checkMortgagePayoff",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_status",
+          "type": "int256"
+        }
+      ],
+      "name": "approveRejectLoan",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getLoanData",
+      "outputs": [
+        {
+          "name": "_addressOfProperty",
+          "type": "bytes32"
+        },
+        {
+          "name": "_purchasePrice",
+          "type": "uint32"
+        },
+        {
+          "name": "_term",
+          "type": "uint32"
+        },
+        {
+          "name": "_interest",
+          "type": "uint32"
+        },
+        {
+          "name": "_loanAmount",
+          "type": "uint32"
+        },
+        {
+          "name": "_annualTax",
+          "type": "uint32"
+        },
+        {
+          "name": "_annualInsurance",
+          "type": "uint32"
+        },
+        {
+          "name": "_status",
+          "type": "int256"
+        },
+        {
+          "name": "_monthlyPi",
+          "type": "uint32"
+        },
+        {
+          "name": "_monthlyTax",
+          "type": "uint32"
+        },
+        {
+          "name": "_monthlyInsurance",
+          "type": "uint32"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_addressOfProperty",
+          "type": "bytes32"
+        },
+        {
+          "name": "_purchasePrice",
+          "type": "uint32"
+        },
+        {
+          "name": "_term",
+          "type": "uint32"
+        },
+        {
+          "name": "_interest",
+          "type": "uint32"
+        },
+        {
+          "name": "_loanAmount",
+          "type": "uint32"
+        },
+        {
+          "name": "_annualTax",
+          "type": "uint32"
+        },
+        {
+          "name": "_annualInsurance",
+          "type": "uint32"
+        },
+        {
+          "name": "_monthlyPi",
+          "type": "uint32"
+        },
+        {
+          "name": "_monthlyTax",
+          "type": "uint32"
+        },
+        {
+          "name": "_monthlyInsurance",
+          "type": "uint32"
+        },
+        {
+          "name": "_mortgageHolder",
+          "type": "address"
+        },
+        {
+          "name": "_insurer",
+          "type": "address"
+        },
+        {
+          "name": "_irs",
+          "type": "address"
+        }
+      ],
+      "name": "submitLoan",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "receiver",
+          "type": "address"
+        }
+      ],
+      "name": "getBalance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "LienReleased",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "LienTrasferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "_status",
+          "type": "int256"
+        }
+      ],
+      "name": "LoanStatus",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x606060405234610000575b60008054600160a060020a03191633600160a060020a03169081178255600882905581526010602052604090206305f5e10090555b5b6107778061004f6000396000f300606060405236156100675763ffffffff60e060020a60003504166327e235e3811461006c57806347e7ef24146100975780635cc8e54e146100c557806393840708146100d4578063a3f14e96146100e6578063f14b7e0c14610158578063f8b2cb4f146101c0575b610000565b3461000057610085600160a060020a03600435166101eb565b60408051918252519081900360200190f35b3461000057610085600160a060020a03600435166024356101fd565b60408051918252519081900360200190f35b34610000576100d2610279565b005b34610000576100d26004356103c2565b005b34610000576100f361049a565b604080519b8c5263ffffffff9a8b1660208d0152988a168b8a015296891660608b015294881660808a015292871660a089015290861660c088015260e08701528416610100860152831661012085015290911661014083015251908190036101600190f35b34610000576100d260043563ffffffff60243581169060443581169060643581169060843581169060a43581169060c43581169060e435811690610104358116906101243516600160a060020a036101443581169061016435811690610184351661051a565b005b3461000057610085600160a060020a036004351661072c565b60408051918252519081900360200190f35b60106020526000908152604090205481565b600160a060020a0333166000908152601060205260408120548290101561022357610273565b600160a060020a0333811660009081526010602052604080822080548690039055918516815220805483019055610258610279565b50600160a060020a0382166000908152601060205260409020545b92915050565b600154600454600554600160a060020a031660009081526010602052604090205463ffffffff91821692821692909202600c02161480156102f65750600154600454600654600160a060020a031660009081526010602052604090205464010000000090910463ffffffff90811692811692909202600c02909116145b80156103425750600154600454600754600160a060020a03166000908152601060205260409020546801000000000000000090910463ffffffff90811692811692909202600c02909116145b156103bf5760005460038054640100000000600160a060020a03938416810277ffffffffffffffffffffffffffffffffffffffff0000000019909216919091179182905560408051919092049092168252517f54baa8a225591732bfb03c9611a550b0662f3668a2e316cf99467ec5efe1ddb09181900360200190a15b5b565b60055433600160a060020a039081169116146103dd57610000565b600881905560028114156104605760038054600160a060020a0333811664010000000090810277ffffffffffffffffffffffffffffffffffffffff00000000199093169290921792839055604080519290930416815290517ff5b202ad34aad00c0fabc445b20216181da94cc429e2e8f1204a7abdabea00919181900360200190a15b60085460408051918252517f9199c2204168edea815389607e935fbabac15bd002ff8a7db78fe8056075afb19181900360200190a15b5b50565b60025460035460015460045460085463ffffffff9384169383811693640100000000808204831694680100000000000000008084048516956c0100000000000000000000000085048616957001000000000000000000000000000000009095048516949093838216939081048216929004165b909192939495969798999a565b8c600160010160000181600019169055508b600160010160010160006101000a81548163ffffffff021916908363ffffffff1602179055508a600160000160000160006101000a81548163ffffffff021916908363ffffffff16021790555089600160000160000160046101000a81548163ffffffff021916908363ffffffff16021790555088600160000160000160086101000a81548163ffffffff021916908363ffffffff160217905550876001600001600001600c6101000a81548163ffffffff021916908363ffffffff16021790555086600160000160000160106101000a81548163ffffffff021916908363ffffffff16021790555085600160030160000160006101000a81548163ffffffff021916908363ffffffff16021790555084600160030160000160046101000a81548163ffffffff021916908363ffffffff16021790555083600160030160000160086101000a81548163ffffffff021916908363ffffffff16021790555082600160040160000160006101000a815481600160a060020a030219169083600160a060020a0316021790555081600160040160010160006101000a815481600160a060020a030219169083600160a060020a0316021790555080600160040160020160006101000a815481600160a060020a030219169083600160a060020a0316021790555060016001600701819055505b50505050505050505050505050565b600160a060020a0381166000908152601060205260409020545b9190505600a165627a7a72305820b9547525072708502ec3df4e891ad81de8f0c6daaf30014d171c847a5aeff4170029",
+  "networks": {},
+  "schema_version": "0.0.5",
+  "updated_at": 1496893988040
+}

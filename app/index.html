@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mortgage Blockchain Demo</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+    .margin-top-1 {
+      margin-top: 1em;
+    }
+  </style>
+</head>
+
+<body class="container">
+    <h2 style="text-align:center">Mortgage Blockchain Demo</h2>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#sectionA" id="home_tab"><i class="fa fa-user"></i> Home Owner</a></li>
+        <li><a data-toggle="tab" href="#sectionB" id="bank_tab"><i class="fa fa-university"></i> Mortgage Holder</a></li>
+        <li><a data-toggle="tab" href="#sectionC" id="insurer_tab"><i class="fa fa-user"></i> Insurer</a></li>
+        <li><a data-toggle="tab" href="#sectionD" id="irs_tab"><i class="fa fa-suitcase"></i> IRS</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="sectionA" class="tab-pane fade in active">
+            <div class="panel panel-primary margin-top-1">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Account Details</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Account Address</td>
+                                <td id="ownerAccount"></td>
+                            </tr>
+                            <tr>
+                                <td>Current Balance</td>
+                                <td id="ownerBalance">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <div>
+                        <div>
+                            <button id="deployLoanContract" class="btn btn-primary">Initiate Loan Contract</button>
+                        </div>
+                        </br>
+                        <div>
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th colspan="2" style="text-align:left">Loan Contract</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td id="sectionAAddress"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Transaction Hash</td>
+                                        <td id="sectionATxnHash">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td id="sectionAStatus">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="panel panel-primary text-center">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Property Details</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align:left">Property Address</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="propertyAddress" placeholder="Property Address">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left">Purchase Price</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="purchasePrice" placeholder="Purchase Price" onChange="truncateToDecimals(this)">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left">Monthly Prin + Interest:</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="PI" name="PI" size="6" disabled="disabled">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left">Monthly Tax:</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="MT" name="MT" size="6" disabled="disabled">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left">Monthly Insurance:</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="MI" name="MI" size="6" disabled="disabled">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left">Total Payment:</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="MP" name="MP" size="6" disabled="disabled">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button id="submitLoan" class="btn btn-primary">Submit Loan</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-primary text-center">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Mortgage Calculator</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align:left">Term (Years):</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="YR" value="30" name="YR" onChange="truncateToDecimals(this)" size="3">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left">Interest:</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="IR" value="3.75" name="IR" onChange="truncateToDecimals(this)" size="6">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left">Loan Amount:</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="LA" value="120000" name="LA" onChange="truncateToDecimals(this)" size="6">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left">Annual Tax:</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="AT" value="1500" name="AT" onChange="truncateToDecimals(this)" size="6">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left">Annual Insurance:</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="AI" value="600" name="AI" onChange="truncateToDecimals(this)" size="6">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button id="calulate" class="btn btn-primary" onClick="dosum()">Calculate</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary text-center">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Make Payments</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                <button id="getMonthlyPayment" class="btn btn-primary" onClick="">Make monthly payment</button>
+                                <button id="completePayment" class="btn btn-primary" onClick="">Complete mortgage payoff</button>
+                            </div>
+                            </br>
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:left">Mortgage Amount</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="valueMH" onChange="truncateToDecimals(this)">
+                                        </td>
+                                        <td style="text-align:left"> Mortgage Holder Account #</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="payMHaddress" disabled="disabled" size="50">
+                                        </td>
+                                        <td>
+                                            <button id="pay" class="btn btn-primary" onClick="makePayment($('#valueMH').val(),$('#payMHaddress').val());">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">Insurance Amount</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="valueIssurer" onChange="truncateToDecimals(this)">
+                                        </td>
+                                        <td style="text-align:left">Insurer Account # </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="payIssureraddress" disabled="disabled" size="50">
+                                        </td>
+                                        <td>
+                                            <button id="pay" class="btn btn-primary" onClick="makePayment($('#valueIssurer').val(),$('#payIssureraddress').val());">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">Tax Amount</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="valueIRS" onChange="truncateToDecimals(this)">
+                                        </td>
+                                        <td style="text-align:left"> IRS Account # </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="payIRSaddress" disabled="disabled" size="50">
+                                        </td>
+                                        <td>
+                                            <button id="pay" class="btn btn-primary" onClick="makePayment($('#valueIRS').val(),$('#payIRSaddress').val());">Send</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sectionB" class="tab-pane fade">
+            <div class="panel panel-primary margin-top-1">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Account Details</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Account Address</td>
+                                <td id="bankAccount"></td>
+                            </tr>
+                            <tr>
+                                <td>Total Mortgage Amount</td>
+                                <td id="totalBankBalance">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Amount Paid</td>
+                                <td id="bankBalance">0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Outstanding Balance</td>
+                                <td id="outstandingBankBalance">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                  <div>
+                      <div>
+                          <table class="table table-striped">
+                              <tbody>
+                                  <tr>
+                                      <th colspan="2" style="text-align:left">Loan Contract</th>
+                                  </tr>
+                                  <tr>
+                                      <td>Address</td>
+                                      <td id="sectionBAddress"></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Status</td>
+                                      <td id="sectionBStatus">
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <button id="approveLoan" class="btn btn-primary">Approve Loan</button>
+                                      </td>
+                                      <td></td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <div id="sectionC" class="tab-pane fade">
+            <div class="panel panel-primary margin-top-1">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Account Details</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Account Address</td>
+                                <td id="insurerAccount"></td>
+                            </tr>
+                            <tr>
+                                <td>Total Insured Amount</td>
+                                <td id="totalInsurerBalance">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Amount Paid</td>
+                                <td id="insurerBalance">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Outstanding Balance</td>
+                                <td id="outstandingInsurerBalance">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                  <div>
+                      <div>
+                          <table class="table table-striped">
+                              <tbody>
+                                  <tr>
+                                      <th colspan="2" style="text-align:left">Loan Contract</th>
+                                  </tr>
+                                  <tr>
+                                      <td>Address</td>
+                                      <td id="sectionCAddress"></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Status</td>
+                                      <td id="sectionCStatus">
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <div id="sectionD" class="tab-pane fade">
+            <div class="panel panel-primary margin-top-1">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Account Details</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Account Address</td>
+                                <td id="irsAccount"></td>
+                            </tr>
+                            <tr>
+                                <td>Total Taxes</td>
+                                <td id="totalIrsBalance">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Amount Paid</td>
+                                <td id="irsBalance">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Outstanding Balance</td>
+                                <td id="outstandingIrsBalance">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                  <div>
+                      <div>
+                          <table class="table table-striped">
+                              <tbody>
+                                  <tr>
+                                      <th colspan="2" style="text-align:left">Loan Contract</th>
+                                  </tr>
+                                  <tr>
+                                      <td>Address</td>
+                                      <td id="sectionDAddress"></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Status</td>
+                                      <td id="sectionDStatus">
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <div id="modalLoanDetails" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <center>
+                        <div class="modal-header">
+                            <h4 class="modal-title">Loan Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>Property Address</td>
+                                        <td id="propAddr"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Purchase Price</td>
+                                        <td id="purPrice">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Term (Years)</td>
+                                        <td id="termYrs">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Interest</td>
+                                        <td id="intr">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Loan Amount</td>
+                                        <td id="loanAmt">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Annual Tax</td>
+                                        <td id="annTax"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Annual Insurance</td>
+                                        <td id="annIns"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button id="modalClose" class="btn btn-primary">Close</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="app.js"></script>
+
+</html>

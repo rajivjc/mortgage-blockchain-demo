@@ -1,0 +1,12 @@
+{
+  "name": "mortgage-blockchain-demo",
+  "version": "0.1.0",
+  "description": "An oversimplified mortgage blockchain demo",
+  "dependencies": {
+    "truffle-default-builder": "^2.0.0"
+  },
+  "license": "UNLICENSED",
+  "repository": {
+    "url": "https://github.com/rajivjc/mortgage-blockchain-demo"
+  }
+}
