@@ -4,17 +4,17 @@ An illustrative DApp to address a potential use case in the mortgage space; Sm
 They can also improve record visibility for all parties and facilitate payment tracking and verification. They reduce errors and costs associated with manual processes.
 
 ## Setup 
-npm install -g ethereumjs-testrpc 
-npm install -g truffle
-mkdir demo
-cd demo
-git clone https://github.com/rajivjc/mortgage-blockchain-demo.git
-cd mortgage-blockchain-demo
-npm install
-truffle build
-truffle serve
+- npm install -g ethereumjs-testrpc 
+- npm install -g truffle
+- mkdir demo
+- cd demo
+- git clone https://github.com/rajivjc/mortgage-blockchain-demo.git
+- cd mortgage-blockchain-demo
+- npm install
+- truffle build
+- truffle serve
 
-Access application - http://localhost:8080
+- Access application - http://localhost:8080
 
 ## Addtional Documentation
 Check out this [blog](https://medium.com/@rajiv.cheriyan/lets-get-started-with-your-first-ethereum-dapp-f09feb59dd78) for more details
