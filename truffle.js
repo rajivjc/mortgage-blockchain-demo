@@ -8,8 +8,7 @@ module.exports = {
     ],
     "app.css": [
       "stylesheets/app.css"
-    ],
-    "images/": "images/"
+    ]
   }),
   networks: {
     development: {
