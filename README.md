@@ -21,5 +21,7 @@ Alternatively you can run the following docker images -
 - docker run -p 8545:8545 -d rajivjc/testrpc
 - docker run -p 8080:8080 -d rajivjc/mortgage-blockchain-demo
 
+## Alternatively you can run the above in the droplet created on digital ocean
+
 ## Addtional Documentation
 Check out this [blog](https://medium.com/@rajiv.cheriyan/lets-get-started-with-your-first-ethereum-dapp-f09feb59dd78) for more details
